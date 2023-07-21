@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0436: Tür içe aktarılan türle çakışıyor
+dotnet_diagnostic.CS0436.severity = none
