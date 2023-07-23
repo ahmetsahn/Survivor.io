@@ -6,6 +6,9 @@ public class PlayerAnimation
     private readonly Animator topTorso;
     private readonly Animator botTorso;
 
+    private const string IS_MOVING = "isMoving";
+    private const string SHOOT = "Shoot";
+
 
     public PlayerAnimation(Animator topTorso,Animator botTorso)
     {
@@ -15,7 +18,7 @@ public class PlayerAnimation
 
     public void PlayShootAnimation()
     {
-        topTorso.Play("Shoot");
+        topTorso.Play(SHOOT);
     }
 
     public void SetTopTorsoRotation(Quaternion newRotation)
@@ -40,6 +43,6 @@ public class PlayerAnimation
 
     public void BotTorsoMoveAnimation(bool move)
     {
-        botTorso.SetBool("IsMoving", move);
+        botTorso.SetBool(IS_MOVING, move);
     }
 }

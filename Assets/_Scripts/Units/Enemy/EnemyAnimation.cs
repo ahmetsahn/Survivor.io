@@ -8,12 +8,11 @@ public class EnemyAnimation : MonoBehaviour
 
     private void Start()
     {
-        if (TryGetComponent(out EnemyHealth enemyHealth))
+        if(TryGetComponent(out EnemyHealth health))
         {
-            enemyHealth.OnDeath += PlayDeathAnimation;
+            health.OnDeath += PlayDeathAnimation;
         }
     }
-
 
     public void PlayDeathAnimation() 
     {

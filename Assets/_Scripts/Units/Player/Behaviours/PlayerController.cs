@@ -20,17 +20,18 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
 
     [Header("Weapon Settings")]
     [SerializeField] private List<WeaponSO> weaponList;
-    [SerializeField] private WeaponSO currentWeapon;
     [SerializeField] private Transform bulletSpawnPos;
 
-    
-    #region Components
-
-    Rigidbody2D rb;
-
-    [Header("Animation")]
+    [Header("Animation Settings")]
     [SerializeField] private Animator topTorso;
     [SerializeField] private Animator botTorso;
+
+    #region Components
+
+
+    Rigidbody2D rb;
+    
+
     #endregion
 
     private void Awake()
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
         rb = GetComponent<Rigidbody2D>();
 
         playerAnimation = new PlayerAnimation(topTorso, botTorso);
-        playerAttack = new PlayerAttack(weaponList,currentWeapon,bulletSpawnPos,playerAnimation);
+        playerAttack = new PlayerAttack(weaponList,bulletSpawnPos,playerAnimation);
         playerHealth = new PlayerHealth(currentHealth,maxHealth);
         playerInput = new PlayerKeyboardInput();
         playerMovement = new PlayerMovement(rb, transform, playerAnimation, playerInput, moveSpeed);
@@ -50,11 +51,13 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
     private void OnEnable()
     {
         playerMovement.AddListener();
+       
     }
 
     private void OnDisable()
     {
         playerMovement.RemoveListener();
+       
     }
 
     private void Start()
@@ -68,9 +71,6 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
         if (GameManager.Instance.state == GameStates.Pause) return;
 
         playerInput.ReadInput();
-        playerMovement.UpdateMovementState();
-        playerMovement.SetBodyRotation();
-        playerMovement.HandleBotTorsoMovement();
         playerAttack.FireControl();
     }
 
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
 
     private void FixedUpdate()
     {
-        playerMovement.ApplyMovementForce();
+        playerMovement.HandleMove();
     }
 
     public void Hit()

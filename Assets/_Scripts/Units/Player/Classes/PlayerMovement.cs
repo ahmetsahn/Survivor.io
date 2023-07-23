@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement
@@ -7,6 +8,7 @@ public class PlayerMovement
     private readonly Transform playerTransform;
     private readonly PlayerAnimation playerAnimation;
     private readonly IInput playerInput;
+
 
     private float currentMoveSpeed;
     private bool isMoving;
@@ -33,16 +35,20 @@ public class PlayerMovement
         UIManager.OnBuffPanelDeactive -= SetMovementSpeedDefault;
     }
 
-
+    public void HandleMove()
+    {
+        ApplyMovementForce();
+        UpdateMovementState();
+        SetBodyRotation();
+        HandleBotTorsoMovement();
+    }
 
     public void UpdateMovementState()
     {
         isMoving = (playerInput.HorizontalInput != 0 || playerInput.VerticalInput != 0);
     }
     
-    
-
-    private Quaternion CalculateBodyRotation()
+    private Quaternion CalculateRotationForBody()
     {
         var difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - playerTransform.position;
         difference.Normalize();
@@ -51,9 +57,9 @@ public class PlayerMovement
 
     }
 
-    public void SetBodyRotation()
+    private void SetBodyRotation()
     {
-        playerAnimation.SetTopTorsoRotation(CalculateBodyRotation());
+        playerAnimation.SetTopTorsoRotation(CalculateRotationForBody());
     }
 
     private Quaternion CalculateRotationForFeet()
@@ -61,10 +67,9 @@ public class PlayerMovement
         var velocity = rb.velocity;
         var angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
         return Quaternion.AngleAxis(angle, Vector3.forward);
-
     }
     
-    private void SetRotateFeet()
+    private void SetFeetRotation()
     {
         playerAnimation.SetBotTorsoRotation(CalculateRotationForFeet());
     }
@@ -83,19 +88,15 @@ public class PlayerMovement
         }
     }
 
-    public void HandleBotTorsoMovement()
+    private void HandleBotTorsoMovement()
     {
         if(isMoving)
         {
-            SetRotateFeet();
+            SetFeetRotation();
             SetBotTorsoScaleBasedOnAngle();
         }
 
         playerAnimation.BotTorsoMoveAnimation(isMoving);
-
-
-
-
     }
     
     public void ApplyMovementForce()

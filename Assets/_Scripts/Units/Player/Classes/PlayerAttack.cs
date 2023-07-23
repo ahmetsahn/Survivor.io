@@ -7,17 +7,17 @@ public class PlayerAttack
     private readonly List<WeaponSO> weaponList;
     private readonly Transform bulletSpawnPos;
     private readonly PlayerAnimation playerAnimation;
-    private WeaponSO currentWeapon;
 
+    private WeaponSO currentWeapon;
     private float timeOfLastFiring = 0f;
 
-    public PlayerAttack(List<WeaponSO> weaponList, WeaponSO currentWeapon,Transform bulletSpawnPos, PlayerAnimation playerAnimation)
+    public PlayerAttack(List<WeaponSO> weaponList,Transform bulletSpawnPos, PlayerAnimation playerAnimation)
     {
         this.weaponList = weaponList;
-        this.currentWeapon = currentWeapon;
         this.bulletSpawnPos = bulletSpawnPos;
         this.playerAnimation = playerAnimation;
 
+        currentWeapon = weaponList[0];
     }
 
     public void SetWeapon(WeaponType weaponType)

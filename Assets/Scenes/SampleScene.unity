@@ -3094,7 +3094,6 @@ MonoBehaviour:
   moveSpeed: 50
   weaponList:
   - {fileID: 11400000, guid: a874e8ef268eaf44e92ed806ddddef58, type: 2}
-  currentWeapon: {fileID: 11400000, guid: a874e8ef268eaf44e92ed806ddddef58, type: 2}
   bulletSpawnPos: {fileID: 688695726}
   topTorso: {fileID: 1916077863}
   botTorso: {fileID: 963104134}
