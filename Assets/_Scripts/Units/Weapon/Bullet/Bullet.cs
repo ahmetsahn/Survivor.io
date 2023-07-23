@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour,IDeathTimer
                 health?.TakeDamage(bulletStats.Damage);
 
                 
-                    health?.CheckHealthAndPlayDeathAnimation();
+                    health?.CheckHealth();
                 
                 
             }

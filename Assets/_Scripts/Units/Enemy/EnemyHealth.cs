@@ -14,6 +14,10 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     [SerializeField] private FloatReference currentExp;
 
+    public void SetHealth()
+    {
+
+    }
   
     public void TakeDamage(int damage)
     {
@@ -21,7 +25,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         OnHit?.Invoke();
     }
 
-    public void CheckHealthAndPlayDeathAnimation()
+    public void CheckHealth()
     {
         if (currentHealth <= 0)
         {

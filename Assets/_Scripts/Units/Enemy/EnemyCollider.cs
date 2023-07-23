@@ -33,7 +33,7 @@ public class EnemyCollider : MonoBehaviour, IPlayerCanHit
                 health.TakeDamage(damage);
 
 
-                health.CheckHealthAndPlayDeathAnimation();
+                health.CheckHealth();
 
             }
         }
