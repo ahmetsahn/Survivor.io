@@ -96,8 +96,4 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
         playerHealth.CheckHealth();
     }
 
-    public void SetHealth()
-    {
-        playerHealth.SetHealth();
-    }
 }

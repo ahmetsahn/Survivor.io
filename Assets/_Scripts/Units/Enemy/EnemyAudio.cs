@@ -1,22 +1,19 @@
 using UnityEngine;
 
-public class EnemyAudio : MonoBehaviour
+public class EnemyAudio
 {
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip hitClip;
+    private readonly AudioSource audioSource;
+    private readonly AudioClip[] audioClips;
 
-    private void Start()
+    public EnemyAudio(AudioSource audioSource, AudioClip[] audioClips)
     {
-        if (TryGetComponent(out EnemyHealth enemyHealth))
-        {
-            enemyHealth.OnHit += PlayHitClip;
-        }
+        this.audioSource = audioSource;
+        this.audioClips = audioClips;
     }
-
 
     public void PlayHitClip()
     {
-        audioSource.PlayOneShot(hitClip);
+        audioSource.PlayOneShot(audioClips[0]);
     }
 
 }

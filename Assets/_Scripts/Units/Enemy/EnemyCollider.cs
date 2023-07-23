@@ -1,20 +1,19 @@
 using UnityEngine;
 
-public class EnemyCollider : MonoBehaviour, IPlayerCanHit
+public class EnemyCollider
 {
-   
-    [field : SerializeField] public GameObject getShotEffect { get; set; }
-    [SerializeField] private int damage;
-    
-    private void Start()
+
+    private readonly Transform enemyTransform;
+    private readonly BoxCollider2D boxCollider;
+
+    private readonly int damage;
+
+    public EnemyCollider(Transform enemyTransform, BoxCollider2D boxCollider, int damage)
     {
-        if (TryGetComponent(out EnemyHealth enemyHealth))
-        {
-            enemyHealth.OnDeath += SetColliderDisable;
-        }
+        this.enemyTransform = enemyTransform;
+        this.boxCollider = boxCollider;
+        this.damage = damage;
     }
-
-
 
 
     public void Hit()
@@ -22,7 +21,7 @@ public class EnemyCollider : MonoBehaviour, IPlayerCanHit
         SpawnShootEffect();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void HandleOnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out IEnemyCanHit hitable))
         {
@@ -42,7 +41,7 @@ public class EnemyCollider : MonoBehaviour, IPlayerCanHit
     private void SpawnShootEffect()
     {
         var shootEffect = EnemyShootEffectPool.Instance.GetObject();
-        shootEffect.transform.position = transform.position;
+        shootEffect.transform.position = enemyTransform.position;
         shootEffect.gameObject.SetActive(true);
     }
 
@@ -53,7 +52,7 @@ public class EnemyCollider : MonoBehaviour, IPlayerCanHit
 
     public void SetColliderDisable()
     {
-       GetComponent<Collider2D>().enabled = false;
+        boxCollider.enabled = false;
     }
 
  

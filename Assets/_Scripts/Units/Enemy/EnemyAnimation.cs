@@ -2,21 +2,18 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAnimation : MonoBehaviour
+public class EnemyAnimation
 {
-    [SerializeField] private Animator enemyAnimator;
+    private readonly Animator animator;
 
-    private void Start()
+    public EnemyAnimation(Animator animator)
     {
-        if(TryGetComponent(out EnemyHealth health))
-        {
-            health.OnDeath += PlayDeathAnimation;
-        }
+        this.animator = animator;
     }
 
     public void PlayDeathAnimation() 
     {
-        enemyAnimator.Play("Death");
+        animator.Play("Death");
     }
 
   

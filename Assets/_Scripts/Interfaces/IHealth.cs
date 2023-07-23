@@ -6,5 +6,4 @@ public interface IHealth
 {
     void TakeDamage(int damage);
     void CheckHealth();
-    void SetHealth();
 }

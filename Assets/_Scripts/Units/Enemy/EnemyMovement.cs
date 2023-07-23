@@ -2,45 +2,36 @@ using ScriptableObjectArchitecture;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement
 {
-    [SerializeField] private float currentMoveSpeed;
+    private readonly Rigidbody2D rb;
+    private readonly Transform enemyTransform;
+
+    private float moveSpeed;
     private Vector3 direction;
-    private Rigidbody2D rb;
+    private GameObject playerPos;
 
-    [HideInInspector] public GameObject PlayerPos { get ; private set; }
-
-
-    private void Awake()
+    public EnemyMovement(Rigidbody2D rb, Transform enemyTransform,float moveSpeed)
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
-    private void OnEnable()
-    {
-        UIManager.OnBuffPanelActive += SetMovementSpeedZero;
-        UIManager.OnBuffPanelDeactive += SetMovementSpeedDefault;
-    }
-
-    private void OnDisable()
-    {
-        UIManager.OnBuffPanelActive -= SetMovementSpeedZero;
-        UIManager.OnBuffPanelDeactive -= SetMovementSpeedDefault;
+        this.rb = rb;
+        this.enemyTransform = enemyTransform;
+        this.moveSpeed = moveSpeed;
     }
 
     public void FindPlayer()
     {
-        PlayerPos = GameObject.Find("Player");
+        playerPos = GameObject.Find("Player");
     }
 
     public void MoveTowards()
     {
-        direction = (PlayerPos.transform.position - transform.position).normalized;
-        rb.velocity = direction * currentMoveSpeed;
+        direction = (playerPos.transform.position - enemyTransform.position).normalized;
+        rb.velocity = direction * moveSpeed;
     }
 
     public void RotateToTarget()
     {
-        direction = (PlayerPos.transform.position - transform.position).normalized;
+        direction = (playerPos.transform.position - enemyTransform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle - 90f);
         rb.MoveRotation(targetRotation);
@@ -48,15 +39,13 @@ public class EnemyMovement : MonoBehaviour
 
     public void SetMovementSpeedZero()
     {
-        currentMoveSpeed = 0;
+        moveSpeed = 0;
     }
 
     public void SetMovementSpeedDefault()
     {
-        currentMoveSpeed = 5;
+        moveSpeed = 5;
     }
-
-
 
 
 }
