@@ -11,18 +11,18 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
     private PlayerCollider playerCollider;
     private IInput playerInput;
 
-    [Header("Health Settings")]
+    [Header("Health")]
     [SerializeField] private FloatReference currentHealth;
     [SerializeField] private FloatReference maxHealth;
 
-    [Header("Movement Settings")]
+    [Header("Movement")]
     [SerializeField] private float moveSpeed;
 
-    [Header("Weapon Settings")]
+    [Header("Weapon")]
     [SerializeField] private List<WeaponSO> weaponList;
     [SerializeField] private Transform bulletSpawnPos;
 
-    [Header("Animation Settings")]
+    [Header("Animation")]
     [SerializeField] private Animator topTorso;
     [SerializeField] private Animator botTorso;
 

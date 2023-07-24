@@ -68,19 +68,12 @@ public class EnemyController : MonoBehaviour,IHealth,IPlayerCanHit
 
     private void FixedUpdate()
     {
-        HandleMovement();
+        enemyMovement.HandleMovement();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         enemyCollider.HandleOnTriggerEnter2D(collision);
-    }
-
-
-    private void HandleMovement()
-    {
-        enemyMovement.MoveTowards();
-        enemyMovement.RotateToTarget();
     }
 
     public void HandleDeathAnimationEnd()

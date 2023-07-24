@@ -23,6 +23,12 @@ public class EnemyMovement
         playerPos = GameObject.Find("Player");
     }
 
+    public void HandleMovement()
+    {
+        MoveTowards();
+        RotateToTarget();
+    }
+
     public void MoveTowards()
     {
         direction = (playerPos.transform.position - enemyTransform.position).normalized;
