@@ -3092,6 +3092,10 @@ MonoBehaviour:
     _constantValue: 0
     _variable: {fileID: 11400000, guid: f1097b45f01b4444da8d9e773d040b18, type: 2}
   moveSpeed: 50
+  isMoving:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: fb1505308239fdd4da4465e9c62fee91, type: 2}
   weaponList:
   - {fileID: 11400000, guid: a874e8ef268eaf44e92ed806ddddef58, type: 2}
   bulletSpawnPos: {fileID: 688695726}

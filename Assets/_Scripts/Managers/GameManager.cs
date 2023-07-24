@@ -1,8 +1,7 @@
 using System;
-using System.Threading.Tasks;
-using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+
+public class GameManager : AhmetUtilities.Singleton<GameManager>
 {
     public GameStates state;
     public event Action OnGame;

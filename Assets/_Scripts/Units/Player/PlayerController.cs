@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
+    [SerializeField] private BoolReference isMoving;
 
     [Header("Weapon")]
     [SerializeField] private List<WeaponSO> weaponList;
@@ -38,14 +39,13 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
     {
         rb = GetComponent<Rigidbody2D>();
 
-        playerAnimation = new PlayerAnimation(topTorso, botTorso);
+        playerAnimation = new PlayerAnimation(topTorso, botTorso,rb, isMoving);
         playerAttack = new PlayerAttack(weaponList,bulletSpawnPos,playerAnimation);
         playerHealth = new PlayerHealth(currentHealth,maxHealth);
         playerInput = new PlayerKeyboardInput();
-        playerMovement = new PlayerMovement(rb, transform, playerAnimation, playerInput, moveSpeed);
+        playerMovement = new PlayerMovement(rb, playerInput, moveSpeed,isMoving);
         playerCollider = new PlayerCollider(transform);
 
-        
     }
 
     private void OnEnable()
@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
 
         playerInput.ReadInput();
         playerAttack.FireControl();
+        playerMovement.UpdateIsMove();
     }
 
     
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
     private void FixedUpdate()
     {
         playerMovement.HandleMove();
+        playerAnimation.HandleAnimatorsRotation();
     }
 
     public void Hit()
