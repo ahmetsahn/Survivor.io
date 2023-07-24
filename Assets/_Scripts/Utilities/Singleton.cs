@@ -30,7 +30,6 @@ namespace AhmetUtilities
             if (instance == null)
             {
                 instance = this as T;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
