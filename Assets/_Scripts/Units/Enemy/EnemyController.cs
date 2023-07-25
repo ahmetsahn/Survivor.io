@@ -101,8 +101,8 @@ public class EnemyController : MonoBehaviour,IHealth,IPlayerCanHit
         enemyHealth.OnHit += enemyAudio.PlayHitClip;
         enemyHealth.OnDeath += enemyAnimation.PlayDeathAnimation;
         enemyHealth.OnDeath += enemyCollider.SetColliderDisable;
-        UIManager.OnBuffPanelActive += enemyMovement.SetMovementSpeedZero;
-        UIManager.OnBuffPanelDeactive += enemyMovement.SetMovementSpeedDefault;
+        UIManager.Instance.OnBuffPanelActive += enemyMovement.SetMovementSpeedZero;
+        UIManager.Instance.OnBuffPanelDeactive += enemyMovement.SetMovementSpeedDefault;
     }
 
     private void RemoveListener()
@@ -110,7 +110,7 @@ public class EnemyController : MonoBehaviour,IHealth,IPlayerCanHit
         enemyHealth.OnHit -= enemyAudio.PlayHitClip;
         enemyHealth.OnDeath -= enemyAnimation.PlayDeathAnimation;
         enemyHealth.OnDeath -= enemyCollider.SetColliderDisable;
-        UIManager.OnBuffPanelActive -= enemyMovement.SetMovementSpeedZero;
-        UIManager.OnBuffPanelDeactive -= enemyMovement.SetMovementSpeedDefault;
+        UIManager.Instance.OnBuffPanelActive -= enemyMovement.SetMovementSpeedZero;
+        UIManager.Instance.OnBuffPanelDeactive -= enemyMovement.SetMovementSpeedDefault;
     }
 }

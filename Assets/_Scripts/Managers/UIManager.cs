@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
     [SerializeField] private FloatReference currentHealth;
     [SerializeField] private FloatReference maxHealth;
@@ -18,8 +18,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject buffPanel;
 
-    public static event Action OnBuffPanelActive;
-    public static event Action OnBuffPanelDeactive;
+    public event Action OnBuffPanelActive;
+    public event Action OnBuffPanelDeactive;
 
     private void Start()
     {
