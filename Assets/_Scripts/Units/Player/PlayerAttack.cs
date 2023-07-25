@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,16 +7,18 @@ public class PlayerAttack
 
     private readonly List<WeaponSO> weaponList;
     private readonly Transform bulletSpawnPos;
-    private readonly PlayerAnimation playerAnimation;
-
+   
     private WeaponSO currentWeapon;
     private float timeOfLastFiring = 0f;
 
-    public PlayerAttack(List<WeaponSO> weaponList,Transform bulletSpawnPos, PlayerAnimation playerAnimation)
+    public event Action OnShoot;
+
+  
+    public PlayerAttack(List<WeaponSO> weaponList,Transform bulletSpawnPos)
     {
         this.weaponList = weaponList;
         this.bulletSpawnPos = bulletSpawnPos;
-        this.playerAnimation = playerAnimation;
+       
 
         currentWeapon = weaponList[0];
     }
@@ -26,6 +29,7 @@ public class PlayerAttack
         if (newWeapon != null)
         {
             currentWeapon = newWeapon;
+            
         }
     }
 
@@ -52,9 +56,9 @@ public class PlayerAttack
 
     }
 
-    protected void Shoot()
+    private void Shoot()
     {
-        playerAnimation.PlayShootAnimation();
+        OnShoot?.Invoke();
         SpawnBullet();
         SpawnMuzzleFlash();
     }

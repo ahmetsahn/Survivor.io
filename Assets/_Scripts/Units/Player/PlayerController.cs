@@ -39,25 +39,23 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
     {
         rb = GetComponent<Rigidbody2D>();
 
-        playerAnimation = new PlayerAnimation(topTorso, botTorso,rb, isMoving);
-        playerAttack = new PlayerAttack(weaponList,bulletSpawnPos,playerAnimation);
-        playerHealth = new PlayerHealth(currentHealth,maxHealth);
+        playerAnimation = new PlayerAnimation(topTorso, botTorso, rb, isMoving);
+        playerAttack = new PlayerAttack(weaponList, bulletSpawnPos);
+        playerHealth = new PlayerHealth(currentHealth, maxHealth);
         playerInput = new PlayerKeyboardInput();
-        playerMovement = new PlayerMovement(rb, playerInput, moveSpeed,isMoving);
+        playerMovement = new PlayerMovement(rb, playerInput, moveSpeed, isMoving);
         playerCollider = new PlayerCollider(transform);
 
     }
 
     private void OnEnable()
     {
-        playerMovement.AddListener();
-       
+        AddListeners();
     }
 
     private void OnDisable()
     {
-        playerMovement.RemoveListener();
-       
+        RemoveListeners();
     }
 
     private void Start()
@@ -98,4 +96,17 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
         playerHealth.CheckHealth();
     }
 
+    public void AddListeners()
+    {
+        UIManager.OnBuffPanelActive += playerMovement.SetMovementSpeedZero;
+        UIManager.OnBuffPanelDeactive += playerMovement.SetMovementSpeedDefault;
+        playerAttack.OnShoot += playerAnimation.PlayShootAnimation;
+    }
+
+    public void RemoveListeners()
+    {
+        UIManager.OnBuffPanelActive -= playerMovement.SetMovementSpeedZero;
+        UIManager.OnBuffPanelDeactive -= playerMovement.SetMovementSpeedDefault;
+        playerAttack.OnShoot -= playerAnimation.PlayShootAnimation;
+    }
 }
