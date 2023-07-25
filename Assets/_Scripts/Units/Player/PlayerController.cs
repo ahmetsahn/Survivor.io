@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
     [SerializeField] private BoolReference isMoving;
 
     [Header("Weapon")]
-    [SerializeField] private List<WeaponSO> weaponList;
+    [SerializeField] private List<BaseWeapon> weaponList;
     [SerializeField] private Transform bulletSpawnPos;
 
     [Header("Animation")]
@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
         UIManager.OnBuffPanelActive += playerMovement.SetMovementSpeedZero;
         UIManager.OnBuffPanelDeactive += playerMovement.SetMovementSpeedDefault;
         playerAttack.OnShoot += playerAnimation.PlayShootAnimation;
+        BuffManager.OnElectricBuff += playerAttack.ChangeWeapon;
     }
 
     public void RemoveListeners()
@@ -108,5 +109,6 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
         UIManager.OnBuffPanelActive -= playerMovement.SetMovementSpeedZero;
         UIManager.OnBuffPanelDeactive -= playerMovement.SetMovementSpeedDefault;
         playerAttack.OnShoot -= playerAnimation.PlayShootAnimation;
+        BuffManager.OnElectricBuff -= playerAttack.ChangeWeapon;
     }
 }

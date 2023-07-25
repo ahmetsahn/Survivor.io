@@ -257,6 +257,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 841257791}
+        m_TargetAssemblyTypeName: BuffManager, Assembly-CSharp
+        m_MethodName: ClickElectricBuff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &155071809
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,6 +932,50 @@ Transform:
   - {fileID: 1622405570}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &841257789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841257790}
+  - component: {fileID: 841257791}
+  m_Layer: 0
+  m_Name: BuffManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &841257790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841257789}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1289767035}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &841257791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841257789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d7d3e1d3f56ad45a37f128328c92af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &931020394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,6 +1537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1057375736}
   - component: {fileID: 1057375737}
+  - component: {fileID: 1057375738}
   m_Layer: 0
   m_Name: BulletPoolManager
   m_TagString: Untagged
@@ -1516,6 +1573,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 7288037301913085361, guid: 883627d6bec7c20418c3c39b97c4e284, type: 3}
+--- !u!114 &1057375738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057375735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00e3d4506de0574ba41a459217dfced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: -4853587069403120036, guid: 5a521f061ae127a4c8c0030bd0fc9d87, type: 3}
 --- !u!1 &1260184847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,6 +1659,7 @@ Transform:
   - {fileID: 1299392579}
   - {fileID: 955794348}
   - {fileID: 1334988347}
+  - {fileID: 841257790}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1299392578
@@ -3087,7 +3158,8 @@ MonoBehaviour:
     _constantValue: 0
     _variable: {fileID: 11400000, guid: fb1505308239fdd4da4465e9c62fee91, type: 2}
   weaponList:
-  - {fileID: 11400000, guid: a874e8ef268eaf44e92ed806ddddef58, type: 2}
+  - {fileID: 11400000, guid: 5c98c75c94b470143972944f0b923c73, type: 2}
+  - {fileID: 11400000, guid: 7ad318571fd2ef245a0a541907b98ee0, type: 2}
   bulletSpawnPos: {fileID: 688695726}
   topTorso: {fileID: 1916077863}
   botTorso: {fileID: 963104134}

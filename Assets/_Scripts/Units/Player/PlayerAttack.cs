@@ -4,48 +4,31 @@ using UnityEngine;
 
 public class PlayerAttack
 {
-
-    private readonly List<WeaponSO> weaponList;
+    private List<BaseWeapon> weapons;
+    private BaseWeapon currentWeapon;
     private readonly Transform bulletSpawnPos;
-   
-    private WeaponSO currentWeapon;
     private float timeOfLastFiring = 0f;
 
     public event Action OnShoot;
 
   
-    public PlayerAttack(List<WeaponSO> weaponList,Transform bulletSpawnPos)
+    public PlayerAttack(List<BaseWeapon> weapons, Transform bulletSpawnPos)
     {
-        this.weaponList = weaponList;
+        this.weapons = weapons;
         this.bulletSpawnPos = bulletSpawnPos;
-       
-
-        currentWeapon = weaponList[0];
+      
+        currentWeapon = weapons.Find(x => x.weaponType == WeaponType.Pistol);
     }
 
-    public void SetWeapon(WeaponSO weapon)
+    public void ChangeWeapon(WeaponType newWeapon)
     {
-        currentWeapon = weapon;
+        currentWeapon = weapons.Find(x => x.weaponType == newWeapon);
     }
 
-   
-
-    protected void SpawnBullet()
-    {
-        var bullet = PistolBulletPool.Instance.GetObject();
-        bullet.transform.SetPositionAndRotation(bulletSpawnPos.position, bulletSpawnPos.rotation);
-        bullet.gameObject.SetActive(true);
-    }
-    protected void SpawnMuzzleFlash()
-    {
-        var muzzleFlash = MuzzleFlashPool.Instance.GetObject();
-        muzzleFlash.transform.SetPositionAndRotation(bulletSpawnPos.position, bulletSpawnPos.rotation);
-        muzzleFlash.gameObject.SetActive(true);
-    }
 
     public void FireControl()
     {
-        if (Time.time >= timeOfLastFiring + currentWeapon.FireRate)
+        if (Time.time >= timeOfLastFiring + currentWeapon.fireRate)
         {
             Shoot();
             OnShoot?.Invoke();
@@ -56,8 +39,8 @@ public class PlayerAttack
 
     private void Shoot()
     {
-        SpawnBullet();
-        SpawnMuzzleFlash();
+        currentWeapon.SpawnBullet(bulletSpawnPos);
+        currentWeapon.SpawnMuzzleFlash(bulletSpawnPos);
     }
 
 }
