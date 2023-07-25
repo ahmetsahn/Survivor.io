@@ -23,19 +23,16 @@ public class PlayerAttack
         currentWeapon = weaponList[0];
     }
 
-    public void SetWeapon(WeaponType weaponType)
+    public void SetWeapon(WeaponSO weapon)
     {
-        var newWeapon = weaponList.Find(weapon => weapon.WeaponType == weaponType);
-        if (newWeapon != null)
-        {
-            currentWeapon = newWeapon;
-            
-        }
+        currentWeapon = weapon;
     }
+
+   
 
     protected void SpawnBullet()
     {
-        var bullet = BulletPool.Instance.GetObject();
+        var bullet = PistolBulletPool.Instance.GetObject();
         bullet.transform.SetPositionAndRotation(bulletSpawnPos.position, bulletSpawnPos.rotation);
         bullet.gameObject.SetActive(true);
     }
@@ -51,6 +48,7 @@ public class PlayerAttack
         if (Time.time >= timeOfLastFiring + currentWeapon.FireRate)
         {
             Shoot();
+            OnShoot?.Invoke();
             timeOfLastFiring = Time.time;
         }
 
@@ -58,7 +56,6 @@ public class PlayerAttack
 
     private void Shoot()
     {
-        OnShoot?.Invoke();
         SpawnBullet();
         SpawnMuzzleFlash();
     }

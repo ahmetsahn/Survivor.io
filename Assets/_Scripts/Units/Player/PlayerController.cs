@@ -98,15 +98,15 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
 
     public void AddListeners()
     {
-        UIManager.Instance.OnBuffPanelActive += playerMovement.SetMovementSpeedZero;
-        UIManager.Instance.OnBuffPanelDeactive += playerMovement.SetMovementSpeedDefault;
+        UIManager.OnBuffPanelActive += playerMovement.SetMovementSpeedZero;
+        UIManager.OnBuffPanelDeactive += playerMovement.SetMovementSpeedDefault;
         playerAttack.OnShoot += playerAnimation.PlayShootAnimation;
     }
 
     public void RemoveListeners()
     {
-        UIManager.Instance.OnBuffPanelActive -= playerMovement.SetMovementSpeedZero;
-        UIManager.Instance.OnBuffPanelDeactive -= playerMovement.SetMovementSpeedDefault;
+        UIManager.OnBuffPanelActive -= playerMovement.SetMovementSpeedZero;
+        UIManager.OnBuffPanelDeactive -= playerMovement.SetMovementSpeedDefault;
         playerAttack.OnShoot -= playerAnimation.PlayShootAnimation;
     }
 }

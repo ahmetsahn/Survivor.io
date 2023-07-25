@@ -45,11 +45,7 @@ public class EnemyCollider
         shootEffect.gameObject.SetActive(true);
     }
 
-    public void SetShootEffect(string shootEffectType)
-    {
-        EnemyShootEffectPool.Instance.SetPrefabType(shootEffectType);
-    }
-
+   
     public void SetColliderDisable()
     {
         boxCollider.enabled = false;

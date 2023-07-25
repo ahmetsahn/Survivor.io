@@ -6,18 +6,11 @@ public abstract class BaseObjectPool<T> : MonoBehaviour where T : Component
 {
     public static BaseObjectPool<T> Instance { get; private set; }
 
+    [SerializeField]
+    private T prefab;
 
-    
-    [SerializeField] protected List<T> prefabs;
-    [SerializeField] protected T currentPrefab;
-    
     private readonly Queue<T> objectPool = new Queue<T>();
-    private readonly List<T> createdInstances = new List<T>();
-    
-    public virtual void SetPrefabType(string Type)
-    {
-        
-    }
+
 
     private void Awake()
     {
@@ -31,14 +24,12 @@ public abstract class BaseObjectPool<T> : MonoBehaviour where T : Component
             AddObject();
         }
 
-        T obj = objectPool.Dequeue();
-        createdInstances.Add(obj);
-        return obj;
+        return objectPool.Dequeue();
     }
 
     private void AddObject()
     {
-        var newObject = Instantiate(currentPrefab);
+        var newObject = Instantiate(prefab);
         newObject.gameObject.SetActive(false);
         objectPool.Enqueue(newObject);
     }
@@ -47,25 +38,7 @@ public abstract class BaseObjectPool<T> : MonoBehaviour where T : Component
     {
         objectToReturn.gameObject.SetActive(false);
         objectPool.Enqueue(objectToReturn);
-
-        
     }
-
-
-    public void ClearPreviousPrefabs()
-    {
-        objectPool.Clear();
-
-        foreach (var obj in createdInstances)
-        {
-            Destroy(obj.gameObject);
-        }
-        
-        createdInstances.Clear();
-    }
-
-
-
 
 
 }

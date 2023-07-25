@@ -22,9 +22,5 @@ public class PlayerCollider
         shootEffect.gameObject.SetActive(true);
     }
 
-    public void SetShootEffect(string shootEffectType)
-    {
-        PlayerShootEffectPool.Instance.SetPrefabType(shootEffectType);
-    }
-
+  
 }

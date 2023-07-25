@@ -1,0 +1,35 @@
+using System;
+using System.Collections;
+using UnityEngine;
+
+public class PistolBullet : BaseBullet
+{
+    private void OnEnable()
+    {
+        StartCoroutine(ReturnToPoolTimer());
+    }
+
+
+    private void Update()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        transform.position += transform.right * (bulletStats.Speed * Time.deltaTime);
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+        PistolBulletPool.Instance.ReturnToPool(this);
+    }
+
+    public IEnumerator ReturnToPoolTimer()
+    {
+        yield return new WaitForSeconds(DeathTimer);
+        PistolBulletPool.Instance.ReturnToPool(this);
+    }
+    
+}

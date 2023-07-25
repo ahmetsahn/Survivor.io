@@ -13,7 +13,7 @@ public class EnemyAnimation
 
     public void PlayDeathAnimation() 
     {
-        animator.Play("Death");
+        animator.SetTrigger("Death");
     }
 
   

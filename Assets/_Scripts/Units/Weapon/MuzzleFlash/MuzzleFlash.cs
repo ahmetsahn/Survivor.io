@@ -6,7 +6,6 @@ using UnityEngine;
 public class MuzzleFlash : MonoBehaviour, IDeathTimer
 {
     [field : SerializeField] public float DeathTimer { get; set; }
-    [field: SerializeField] public MuzzleFlashType MuzzleFlashType { get; set; }
 
     private void OnEnable()
     {
