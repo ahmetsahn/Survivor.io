@@ -51,6 +51,11 @@ public class EnemyCollider
         boxCollider.enabled = false;
     }
 
+    public void SetDefaultCollider()
+    {
+        boxCollider.enabled = true;
+    }
+
  
 
   

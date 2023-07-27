@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
         UIManager.OnBuffPanelActive += playerMovement.SetMovementSpeedZero;
         UIManager.OnBuffPanelDeactive += playerMovement.SetMovementSpeedDefault;
         playerAttack.OnShoot += playerAnimation.PlayShootAnimation;
-        BuffManager.OnElectricBuff += playerAttack.ChangeWeapon;
+        BuffManager.OnElectricBuff += playerAttack.SetElectricWeapon;
     }
 
     public void RemoveListeners()
@@ -109,6 +109,8 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
         UIManager.OnBuffPanelActive -= playerMovement.SetMovementSpeedZero;
         UIManager.OnBuffPanelDeactive -= playerMovement.SetMovementSpeedDefault;
         playerAttack.OnShoot -= playerAnimation.PlayShootAnimation;
-        BuffManager.OnElectricBuff -= playerAttack.ChangeWeapon;
+        BuffManager.OnElectricBuff -= playerAttack.SetElectricWeapon;
     }
+
+
 }

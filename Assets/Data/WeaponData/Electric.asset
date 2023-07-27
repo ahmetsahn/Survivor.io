@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f6ab3b13a8e224db61fc6d2494ae36, type: 3}
   m_Name: Electric
   m_EditorClassIdentifier: 
-  fireRate: 0.5
+  weaponType: 1
+  fireRate: 0.2

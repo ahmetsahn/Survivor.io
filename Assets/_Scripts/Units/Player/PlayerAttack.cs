@@ -20,9 +20,9 @@ public class PlayerAttack
         currentWeapon = weapons.Find(x => x.weaponType == WeaponType.Pistol);
     }
 
-    public void ChangeWeapon(WeaponType newWeapon)
+    public void SetElectricWeapon()
     {
-        currentWeapon = weapons.Find(x => x.weaponType == newWeapon);
+        currentWeapon = weapons.Find(x => x.weaponType == WeaponType.Electric);
     }
 
 

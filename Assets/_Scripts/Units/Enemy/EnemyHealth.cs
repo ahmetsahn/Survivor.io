@@ -10,29 +10,36 @@ public class EnemyHealth
     public event Action OnHit;
     public event Action OnDeath;
 
-    private float health;
+    private float currentHealth;
+    private readonly float maxHealth;
     [SerializeField] private FloatReference currentExp;
 
-    public EnemyHealth(float health, FloatReference currentExp)
+    public EnemyHealth(float currentHealth,float maxHealth, FloatReference currentExp)
     {
-        this.health = health;
+        this.currentHealth = currentHealth;
+        this.maxHealth = maxHealth;
         this.currentExp = currentExp;
     }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        currentHealth -= damage;
         OnHit?.Invoke();
     }
 
     public void CheckHealth()
     {
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             OnDeath?.Invoke();
             currentExp.Value++;
         }
     }
+
+    public void SetDefaulthHealth()
+    {
+        currentHealth = maxHealth;
+    }   
     
     
 }

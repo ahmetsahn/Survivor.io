@@ -16,5 +16,4 @@ public class EnemyAnimation
         animator.SetTrigger("Death");
     }
 
-  
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class BuffManager : MonoBehaviour
 {
     public static event Action OnSonarBuff;
-    public static event Action<WeaponType> OnElectricBuff;
+    public static event Action OnElectricBuff;
     public static event Action OnArmorBuff;
 
     public void ClickSonarBuff()
@@ -16,7 +16,7 @@ public class BuffManager : MonoBehaviour
 
     public void ClickElectricBuff()
     {
-        OnElectricBuff?.Invoke(WeaponType.Electric);
+        OnElectricBuff?.Invoke();
     }
 
     public void ClickArmorBuff()

@@ -10,10 +10,12 @@ public class EnemyController : MonoBehaviour,IHealth,IPlayerCanHit
     private EnemyHealth enemyHealth;
     private EnemyAnimation enemyAnimation;
     private EnemyCollider enemyCollider;
+    private EnemySpriteRenderer enemySpriteRenderer;
 
 
     [Header("Health")]
-    [SerializeField] private float health;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float maxHealth;
 
     [Header("Audio")]
     [SerializeField] private AudioClip[] audioClips;
@@ -28,12 +30,16 @@ public class EnemyController : MonoBehaviour,IHealth,IPlayerCanHit
     [Header("Attack")]
     [SerializeField] private int damage;
 
+    
+    
+
     #region Components
 
     private AudioSource audioSource;
     private Animator animator;
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
 
     #endregion
 
@@ -43,22 +49,28 @@ public class EnemyController : MonoBehaviour,IHealth,IPlayerCanHit
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         enemyAudio = new EnemyAudio(audioSource,audioClips);
         enemyMovement = new EnemyMovement(rb,transform,moveSpeed);
-        enemyHealth = new EnemyHealth(health,currentExp);
+        enemyHealth = new EnemyHealth(currentHealth, maxHealth, currentExp);
         enemyAnimation = new EnemyAnimation(animator);
         enemyCollider = new EnemyCollider(transform,boxCollider,damage);
+        enemySpriteRenderer = new EnemySpriteRenderer(spriteRenderer);
     }
 
     private void OnEnable()
     {
         AddListener();
+        
     }
 
     private void OnDisable()
     {
         RemoveListener();
+        enemyCollider.SetDefaultCollider();
+        enemySpriteRenderer.SetDefaultSpriteAlpha();
+        enemyHealth.SetDefaulthHealth();
     }
 
     private void Start()

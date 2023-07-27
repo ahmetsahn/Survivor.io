@@ -290,7 +290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6857420ff42184bba9fb408ea1d779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  currentHealth: 100
+  maxHealth: 100
   audioClips:
   - {fileID: 8300000, guid: cf191ef0ff70baf4f8b323ed5f592b9c, type: 3}
   currentExp:
