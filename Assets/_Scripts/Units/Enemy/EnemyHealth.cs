@@ -4,42 +4,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyHealth
+public class EnemyHealth : MonoBehaviour,IHealth
 {
     
     public event Action OnHit;
     public event Action OnDeath;
 
-    private float currentHealth;
-    private readonly float maxHealth;
+    private float health;
+    [SerializeField] private FloatReference maxHealth;
     [SerializeField] private FloatReference currentExp;
 
-    public EnemyHealth(float currentHealth,float maxHealth, FloatReference currentExp)
+    private void OnDisable()
     {
-        this.currentHealth = currentHealth;
-        this.maxHealth = maxHealth;
-        this.currentExp = currentExp;
+        health = maxHealth.Value;
     }
 
-    public void TakeDamage(int damage)
+    private void Start()
     {
-        currentHealth -= damage;
+        health = maxHealth.Value;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
         OnHit?.Invoke();
     }
 
     public void CheckHealth()
     {
-        if (currentHealth <= 0)
+        if (health <= 0)
         {
             OnDeath?.Invoke();
             currentExp.Value++;
         }
     }
 
-    public void SetDefaulthHealth()
-    {
-        currentHealth = maxHealth;
-    }   
-    
-    
 }

@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour,IHealth
         currentHealth.Value = maxHealth.Value;
     }
     
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth.Value -= damage;
     }

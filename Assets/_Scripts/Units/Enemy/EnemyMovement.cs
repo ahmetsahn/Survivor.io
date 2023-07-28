@@ -2,25 +2,56 @@ using ScriptableObjectArchitecture;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class EnemyMovement
+[RequireComponent(typeof(Rigidbody2D))]
+public class EnemyMovement : MonoBehaviour
 {
-    private readonly Rigidbody2D rb;
-    private readonly Transform enemyTransform;
-
-    private float moveSpeed;
+    
+    [SerializeField] private float moveSpeed;
+    private Rigidbody2D rb;
+    private Transform playerPos;
     private Vector3 direction;
-    private GameObject playerPos;
+    
 
-    public EnemyMovement(Rigidbody2D rb, Transform enemyTransform,float moveSpeed)
+    private void Awake()
     {
-        this.rb = rb;
-        this.enemyTransform = enemyTransform;
-        this.moveSpeed = moveSpeed;
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    public void FindPlayer()
+    private void OnEnable()
     {
-        playerPos = GameObject.Find("Player");
+        AddListeners();
+    }
+
+    private void OnDisable()
+    {
+        RemoveListeners();
+    }
+
+    private void AddListeners()
+    {
+        UIManager.OnBuffPanelActive += SetMovementSpeedZero;
+        UIManager.OnBuffPanelDeactive += SetMovementSpeedDefault;
+    }
+
+    private void RemoveListeners()
+    {
+        UIManager.OnBuffPanelActive -= SetMovementSpeedZero;
+        UIManager.OnBuffPanelDeactive -= SetMovementSpeedDefault;
+    }
+
+    private void Start()
+    {
+        FindPlayer();
+    }
+
+    private void FixedUpdate()
+    {
+        HandleMovement();
+    }
+
+    private void FindPlayer()
+    {
+        playerPos = GameObject.Find("Player").transform;
     }
 
     public void HandleMovement()
@@ -31,13 +62,13 @@ public class EnemyMovement
 
     public void MoveTowards()
     {
-        direction = (playerPos.transform.position - enemyTransform.position).normalized;
+        direction = (playerPos.transform.position - transform.position).normalized;
         rb.velocity = direction * moveSpeed;
     }
 
     public void RotateToTarget()
     {
-        direction = (playerPos.transform.position - enemyTransform.position).normalized;
+        direction = (playerPos.transform.position - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle - 90f);
         rb.MoveRotation(targetRotation);

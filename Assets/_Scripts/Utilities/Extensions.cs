@@ -19,5 +19,4 @@ public static class Extensions
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-
 }

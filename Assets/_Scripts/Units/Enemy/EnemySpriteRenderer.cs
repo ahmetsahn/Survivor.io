@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpriteRenderer
+[RequireComponent(typeof(SpriteRenderer))]
+public class EnemySpriteRenderer : MonoBehaviour
 {
-    private readonly SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
+    Color defaultColor = new(1, 1, 1, 1);
 
-    public EnemySpriteRenderer(SpriteRenderer spriteRenderer)
+    private void Awake()
     {
-        this.spriteRenderer = spriteRenderer;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private void OnDisable()
+    {
+        SetDefaultSpriteAlpha();
+    }
+   
     public void SetDefaultSpriteAlpha()
     {
-        Color spriteColor = spriteRenderer.color;
-        spriteColor.a = 1f;
-        spriteRenderer.color = spriteColor;
+        spriteRenderer.color = defaultColor;
     }
 }

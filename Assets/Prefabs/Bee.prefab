@@ -14,7 +14,12 @@ GameObject:
   - component: {fileID: 406764633413622417}
   - component: {fileID: 406764633413622416}
   - component: {fileID: 2247641804388484877}
-  - component: {fileID: 406764633413622414}
+  - component: {fileID: 6168696511794242941}
+  - component: {fileID: -6611406184409074725}
+  - component: {fileID: -7380361567545871090}
+  - component: {fileID: -1668503397174885195}
+  - component: {fileID: 2948264675251874602}
+  - component: {fileID: -1186197570174403739}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Enemy
@@ -278,7 +283,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &406764633413622414
+--- !u!114 &6168696511794242941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,16 +292,81 @@ MonoBehaviour:
   m_GameObject: {fileID: 406764633413622423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e6857420ff42184bba9fb408ea1d779, type: 3}
+  m_Script: {fileID: 11500000, guid: 630bedfb7ece86d4e886bc9694eccff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
+--- !u!114 &-6611406184409074725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406764633413622423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2c8b65095bbb848989484bc6f25565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   audioClips:
   - {fileID: 8300000, guid: cf191ef0ff70baf4f8b323ed5f592b9c, type: 3}
+--- !u!114 &-7380361567545871090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406764633413622423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a762be28c636b6429529fb4d9dbbf45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 4e9ed607c149e1c4588caef6ee122fd0, type: 2}
+--- !u!114 &-1668503397174885195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406764633413622423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c50054cfe5beba43adf923a1c8a28a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 058984d42a3cb2c459a13df398980927, type: 2}
   currentExp:
     _useConstant: 0
     _constantValue: 0
     _variable: {fileID: 11400000, guid: f2fff9414fe80174595d97f3a90d2a9f, type: 2}
+--- !u!114 &2948264675251874602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406764633413622423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb13cc79988b0154b8e9b84ce6df5770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   moveSpeed: 5
-  damage: 10
+--- !u!114 &-1186197570174403739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406764633413622423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a67cbcc73cd4a740a283223aed6d883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

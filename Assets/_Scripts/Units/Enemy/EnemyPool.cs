@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyPool : BaseObjectPool<EnemyController>
+public class EnemyPool : BaseObjectPool<EnemyAnimation>
 {
     
 }

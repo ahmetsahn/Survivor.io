@@ -1,27 +1,30 @@
+using ScriptableObjectArchitecture;
 using UnityEngine;
 
-public class EnemyCollider
+[RequireComponent(typeof(BoxCollider2D))]
+public class EnemyCollider : MonoBehaviour, IPlayerCanHit
 {
+    private BoxCollider2D boxCollider;
 
-    private readonly Transform enemyTransform;
-    private readonly BoxCollider2D boxCollider;
+    [SerializeField] private FloatReference damage;
 
-    private readonly int damage;
-
-    public EnemyCollider(Transform enemyTransform, BoxCollider2D boxCollider, int damage)
+    private void Awake()
     {
-        this.enemyTransform = enemyTransform;
-        this.boxCollider = boxCollider;
-        this.damage = damage;
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
-
-    public void Hit()
+    private void OnEnable()
     {
-        SpawnShootEffect();
+        AddListeners();
     }
 
-    public void HandleOnTriggerEnter2D(Collider2D collision)
+    private void OnDisable()
+    {
+        RemoveListeners();
+        SetEnableCollider();
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out IEnemyCanHit hitable))
         {
@@ -29,7 +32,7 @@ public class EnemyCollider
 
             if (collision.gameObject.TryGetComponent(out IHealth health))
             {
-                health.TakeDamage(damage);
+                health.TakeDamage(damage.Value);
 
 
                 health.CheckHealth();
@@ -38,25 +41,44 @@ public class EnemyCollider
         }
     }
 
+    public void Hit()
+    {
+        SpawnShootEffect();
+    }
+
     private void SpawnShootEffect()
     {
         var shootEffect = EnemyShootEffectPool.Instance.GetObject();
-        shootEffect.transform.position = enemyTransform.position;
+        shootEffect.transform.position = transform.position;
         shootEffect.gameObject.SetActive(true);
     }
 
    
-    public void SetColliderDisable()
+    public void SetDisableCollider()
     {
         boxCollider.enabled = false;
     }
 
-    public void SetDefaultCollider()
+    public void SetEnableCollider()
     {
         boxCollider.enabled = true;
     }
 
- 
+    private void AddListeners()
+    {
+        if (TryGetComponent(out EnemyHealth enemyHealth))
+        {
+            enemyHealth.OnDeath += SetDisableCollider;
+        }
+    }
 
-  
+    private void RemoveListeners()
+    {
+        if (TryGetComponent(out EnemyHealth enemyHealth))
+        {
+            enemyHealth.OnDeath -= SetDisableCollider;
+        }
+    }
+
+
 }

@@ -12,6 +12,16 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPos;
     private float timeOfLastFiring = 0f;
 
+    private void OnEnable()
+    {
+        BuffManager.OnElectricBuff += SetElectricWeapon;
+    }
+
+    private void OnDisable()
+    {
+        BuffManager.OnElectricBuff -= SetElectricWeapon;
+    }
+
     private void Start()
     {
         SetStartWeapon();
