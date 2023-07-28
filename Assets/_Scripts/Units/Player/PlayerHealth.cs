@@ -1,19 +1,17 @@
 using ScriptableObjectArchitecture;
 using UnityEngine;
 
-public class PlayerHealth
+public class PlayerHealth : MonoBehaviour,IHealth
 {
-    
 
-    private readonly FloatReference currentHealth;
-    private readonly FloatReference maxHealth;
+    [SerializeField] private FloatReference currentHealth;
+    [SerializeField] private FloatReference maxHealth;
 
-
-    public PlayerHealth(FloatReference currentHealth,FloatReference maxHealth)
+    private void Start()
     {
-        this.currentHealth = currentHealth;
-        this.maxHealth = maxHealth;
+        SetHealth();
     }
+
     public void SetHealth()
     {
         currentHealth.Value = maxHealth.Value;

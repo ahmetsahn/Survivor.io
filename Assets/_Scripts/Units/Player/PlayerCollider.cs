@@ -1,15 +1,8 @@
 using System;
 using UnityEngine;
 
-public class PlayerCollider
+public class PlayerCollider : MonoBehaviour, IEnemyCanHit
 {
-    private readonly Transform playerTransform;
-
-    public PlayerCollider(Transform playerTransform)
-    {
-        this.playerTransform = playerTransform;
-    }
-
     public void Hit()
     {
         SpawnShootEffect();
@@ -18,7 +11,7 @@ public class PlayerCollider
     private void SpawnShootEffect()
     {
         var shootEffect = PlayerShootEffectPool.Instance.GetObject();
-        shootEffect.transform.position = playerTransform.position;
+        shootEffect.transform.position = transform.position;
         shootEffect.gameObject.SetActive(true);
     }
 

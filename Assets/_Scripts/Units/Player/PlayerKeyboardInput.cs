@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerKeyboardInput : IInput
+public class PlayerKeyboardInput : MonoBehaviour, IInput
 {
     public float HorizontalInput { get; set; }
     public float VerticalInput { get; set; }
@@ -11,5 +11,11 @@ public class PlayerKeyboardInput : IInput
         VerticalInput = Input.GetAxisRaw("Vertical");
     }
 
-  
+
+    private void Update()
+    {
+        if (GameManager.Instance.state == GameStates.Pause) return;
+        ReadInput();
+    }
+
 }

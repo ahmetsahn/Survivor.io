@@ -1,23 +1,26 @@
 using ScriptableObjectArchitecture;
 using UnityEngine;
 
-public class PlayerAnimation
+public class PlayerAnimation : MonoBehaviour
 {
 
-    private readonly Animator topTorso;
-    private readonly Animator botTorso;
-    private readonly Rigidbody2D rb;
-    private readonly BoolReference isMoving;
+    [SerializeField] private Animator topTorso;
+    [SerializeField] private Animator botTorso;
+    [SerializeField] private BoolReference isMoving;
+   
 
     private const string IS_MOVING = "isMoving";
     private const string SHOOT = "Shoot";
-  
-    public PlayerAnimation(Animator topTorso,Animator botTorso,Rigidbody2D rb,BoolReference isMoving)
+
+    private void OnEnable()
     {
-        this.topTorso = topTorso;
-        this.botTorso = botTorso;
-        this.rb = rb;
-        this.isMoving = isMoving;
+        AddListeners();
+    }
+
+    private void FixedUpdate()
+    {
+        if (GameManager.Instance.state == GameStates.Pause) return;
+        HandleAnimatorsRotation();
     }
 
     public void PlayShootAnimation()
@@ -26,17 +29,13 @@ public class PlayerAnimation
     }
 
     public void SetTopTorsoRotation()
-    {
-   
-        Vector3 topTorsoPosition = topTorso.transform.position;
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        topTorso.transform.rotation = topTorsoPosition.CalculateAngleRotationBetweenPoints(mousePosition);
-
+    { 
+        topTorso.transform.LookAtMouse();
     }
 
     public void SetBotTorsoRotation()
     {
-        botTorso.transform.rotation = rb.CalculateRotationFromVelocity();
+        botTorso.transform.RotateFromMovementDirection();
     }
 
     public void BotTorsoMoveAnimation(bool move)
@@ -52,4 +51,13 @@ public class PlayerAnimation
         BotTorsoMoveAnimation(isMoving.Value);
         SetBotTorsoRotation();
     }
+
+    private void AddListeners()
+    {
+        if(TryGetComponent(out PlayerAttack playerAttack))
+        {
+            playerAttack.OnShoot += PlayShootAnimation;
+        }
+    }
+
 }

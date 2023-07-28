@@ -2,22 +2,32 @@ using ScriptableObjectArchitecture;
 using System;
 using UnityEngine;
 
-public class PlayerMovement
+[RequireComponent(typeof(Rigidbody2D))]
+public class PlayerMovement : MonoBehaviour
 {
     
-    private readonly Rigidbody2D rb;
-    private readonly IInput playerInput;
-    private readonly BoolReference isMoving;
-    private float currentMoveSpeed;
+    private Rigidbody2D rb;
+    private IInput playerInput;
+    [SerializeField] private BoolReference isMoving;
+    [SerializeField] private float currentMoveSpeed;
 
-    public PlayerMovement(Rigidbody2D rb, IInput playerInput, float currentMoveSpeed,BoolReference isMoving)
+    private void Awake()
     {
-        this.rb = rb;
-        this.playerInput = playerInput;
-        this.currentMoveSpeed = currentMoveSpeed;
-        this.isMoving = isMoving;
+        rb = GetComponent<Rigidbody2D>();
+        playerInput = GetComponent<IInput>();
     }
-   
+
+    private void Update()
+    {
+        UpdateIsMove();
+    }
+
+    private void FixedUpdate()
+    {
+        if (GameManager.Instance.state == GameStates.Pause) return;
+        HandleMove();
+    }
+
     public void HandleMove()
     {
         ApplyMovementForce();
@@ -42,4 +52,6 @@ public class PlayerMovement
     {
         isMoving.Value = (playerInput.HorizontalInput != 0 || playerInput.VerticalInput != 0);
     }
+
+  
 }

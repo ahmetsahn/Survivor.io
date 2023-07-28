@@ -2,7 +2,7 @@ using ScriptableObjectArchitecture;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
+public class PlayerController : MonoBehaviour
 {
     private PlayerAnimation playerAnimation;
     private PlayerAttack playerAttack;
@@ -11,56 +11,21 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
     private PlayerCollider playerCollider;
     private IInput playerInput;
 
-    [Header("Health")]
-    [SerializeField] private FloatReference currentHealth;
-    [SerializeField] private FloatReference maxHealth;
-
-    [Header("Movement")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private BoolReference isMoving;
-
-    [Header("Weapon")]
-    [SerializeField] private List<BaseWeapon> weaponList;
-    [SerializeField] private Transform bulletSpawnPos;
-
-    [Header("Animation")]
-    [SerializeField] private Animator topTorso;
-    [SerializeField] private Animator botTorso;
-
-    #region Components
-
-
-    Rigidbody2D rb;
-    
-
-    #endregion
-
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-
-        playerAnimation = new PlayerAnimation(topTorso, botTorso, rb, isMoving);
-        playerAttack = new PlayerAttack(weaponList, bulletSpawnPos);
-        playerHealth = new PlayerHealth(currentHealth, maxHealth);
-        playerInput = new PlayerKeyboardInput();
-        playerMovement = new PlayerMovement(rb, playerInput, moveSpeed, isMoving);
-        playerCollider = new PlayerCollider(transform);
-
+        playerAnimation = GetComponent<PlayerAnimation>();
+        playerAttack = GetComponent<PlayerAttack>();
+        playerHealth = GetComponent<PlayerHealth>();
+        playerInput = GetComponent<IInput>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerCollider = GetComponent<PlayerCollider>();
     }
 
-    private void OnEnable()
-    {
-        AddListeners();
-    }
-
-    private void OnDisable()
-    {
-        RemoveListeners();
-    }
-
+   
     private void Start()
     {
         playerHealth.SetHealth();
+        playerAttack.SetStartWeapon();
     }
 
 
@@ -81,36 +46,5 @@ public class PlayerController : MonoBehaviour,IEnemyCanHit,IHealth
         playerAnimation.HandleAnimatorsRotation();
     }
 
-    public void Hit()
-    {
-        playerCollider.Hit();
-    }
-
-    public void TakeDamage(int damage)
-    {
-        playerHealth.TakeDamage(damage);
-    }
-
-    public void CheckHealth()
-    {
-        playerHealth.CheckHealth();
-    }
-
-    public void AddListeners()
-    {
-        UIManager.OnBuffPanelActive += playerMovement.SetMovementSpeedZero;
-        UIManager.OnBuffPanelDeactive += playerMovement.SetMovementSpeedDefault;
-        playerAttack.OnShoot += playerAnimation.PlayShootAnimation;
-        BuffManager.OnElectricBuff += playerAttack.SetElectricWeapon;
-    }
-
-    public void RemoveListeners()
-    {
-        UIManager.OnBuffPanelActive -= playerMovement.SetMovementSpeedZero;
-        UIManager.OnBuffPanelDeactive -= playerMovement.SetMovementSpeedDefault;
-        playerAttack.OnShoot -= playerAnimation.PlayShootAnimation;
-        BuffManager.OnElectricBuff -= playerAttack.SetElectricWeapon;
-    }
-
-
+    
 }

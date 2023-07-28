@@ -4,20 +4,20 @@ using UnityEngine;
 
 public static class Extensions
 {
-    public static Quaternion CalculateAngleRotationBetweenPoints(this Vector3 fromPoint, Vector3 toPoint)
+    public static void LookAtMouse(this Transform transform)
     {
-        Vector3 difference = toPoint - fromPoint;
-        difference.Normalize();
-        float angle = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        return Quaternion.Euler(0, 0, angle);
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = mousePos - transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    public static Quaternion CalculateRotationFromVelocity(this Rigidbody2D rb)
+    public static void RotateFromMovementDirection(this Transform transform)
     {
-        var velocity = rb.velocity;
-        var angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-        return Quaternion.AngleAxis(angle, Vector3.forward);
+        Vector3 movementDirection = transform.forward;
+        float angle = Mathf.Atan2(movementDirection.y, movementDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-  
+
 }

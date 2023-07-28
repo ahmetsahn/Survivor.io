@@ -269,6 +269,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &155071809
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,7 +3015,12 @@ GameObject:
   - component: {fileID: 2132072068}
   - component: {fileID: 2132072063}
   - component: {fileID: 2132072071}
-  - component: {fileID: 2132072067}
+  - component: {fileID: 2132072076}
+  - component: {fileID: 2132072075}
+  - component: {fileID: 2132072074}
+  - component: {fileID: 2132072072}
+  - component: {fileID: 2132072077}
+  - component: {fileID: 2132072078}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3038,37 +3055,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2132072067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2132072062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eff8591f2a95864f8de881100d825ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: 66527bb19f644aa4ba51e776fc928cc2, type: 2}
-  maxHealth:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: f1097b45f01b4444da8d9e773d040b18, type: 2}
-  moveSpeed: 50
-  isMoving:
-    _useConstant: 0
-    _constantValue: 0
-    _variable: {fileID: 11400000, guid: fb1505308239fdd4da4465e9c62fee91, type: 2}
-  weaponList:
-  - {fileID: 11400000, guid: 5c98c75c94b470143972944f0b923c73, type: 2}
-  - {fileID: 11400000, guid: 7ad318571fd2ef245a0a541907b98ee0, type: 2}
-  bulletSpawnPos: {fileID: 688695726}
-  topTorso: {fileID: 1916077863}
-  botTorso: {fileID: 963104134}
 --- !u!4 &2132072068
 Transform:
   m_ObjectHideFlags: 0
@@ -3130,6 +3116,101 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7312274, y: 1.4127898}
   m_EdgeRadius: 0
+--- !u!114 &2132072072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132072062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3810a2e07a22f0742a7027ee92adcd3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMoving:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: fb1505308239fdd4da4465e9c62fee91, type: 2}
+  currentMoveSpeed: 50
+--- !u!114 &2132072074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132072062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517b05d2111f1e240ac3212f31c73bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 66527bb19f644aa4ba51e776fc928cc2, type: 2}
+  maxHealth:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: f1097b45f01b4444da8d9e773d040b18, type: 2}
+--- !u!114 &2132072075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132072062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c59f7f27217e6b4396ff80c2180fc61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2132072076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132072062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f896a8879893c704cb9092d15096e3c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 11400000, guid: 5c98c75c94b470143972944f0b923c73, type: 2}
+  - {fileID: 11400000, guid: 7ad318571fd2ef245a0a541907b98ee0, type: 2}
+  bulletSpawnPos: {fileID: 688695726}
+--- !u!114 &2132072077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132072062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb69cae6d91f1e499c19a35c1b83300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topTorso: {fileID: 1916077863}
+  botTorso: {fileID: 963104134}
+  isMoving:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: fb1505308239fdd4da4465e9c62fee91, type: 2}
+--- !u!114 &2132072078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132072062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 509547465e0eaf04586c669788c4b057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2136689450
 GameObject:
   m_ObjectHideFlags: 0

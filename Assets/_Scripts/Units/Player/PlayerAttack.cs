@@ -2,21 +2,29 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack
+public class PlayerAttack : MonoBehaviour
 {
-    private List<BaseWeapon> weapons;
-    private BaseWeapon currentWeapon;
-    private readonly Transform bulletSpawnPos;
-    private float timeOfLastFiring = 0f;
 
     public event Action OnShoot;
 
-  
-    public PlayerAttack(List<BaseWeapon> weapons, Transform bulletSpawnPos)
+    private BaseWeapon currentWeapon;
+    [SerializeField] private List<BaseWeapon> weapons;
+    [SerializeField] private Transform bulletSpawnPos;
+    private float timeOfLastFiring = 0f;
+
+    private void Start()
     {
-        this.weapons = weapons;
-        this.bulletSpawnPos = bulletSpawnPos;
-      
+        SetStartWeapon();
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.state == GameStates.Pause) return;
+        FireControl();
+    }
+
+    public void SetStartWeapon()
+    {
         currentWeapon = weapons.Find(x => x.weaponType == WeaponType.Pistol);
     }
 
@@ -24,7 +32,6 @@ public class PlayerAttack
     {
         currentWeapon = weapons.Find(x => x.weaponType == WeaponType.Electric);
     }
-
 
     public void FireControl()
     {
