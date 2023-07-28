@@ -1,3 +1,4 @@
+using ScriptableObjectArchitecture;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,22 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public abstract class BaseBullet : MonoBehaviour, IDeathTimer
 {
-    [SerializeField] protected BulletStatsSO bulletStats;
+    [SerializeField] protected FloatReference damage;
+    [SerializeField] protected FloatReference speed;
     [field: SerializeField] public float DeathTimer { get; set; }
 
-  
+
+    private void Update()
+    {
+        Move();
+    }
+
+    protected void Move()
+    {
+        transform.position += transform.right * (speed.Value * Time.deltaTime);
+    }
+
+
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
 
@@ -18,7 +31,7 @@ public abstract class BaseBullet : MonoBehaviour, IDeathTimer
 
             if (collision.gameObject.TryGetComponent(out IHealth health))
             {
-                health?.TakeDamage(bulletStats.Damage);
+                health?.TakeDamage(damage.Value);
 
 
                 health?.CheckHealth();

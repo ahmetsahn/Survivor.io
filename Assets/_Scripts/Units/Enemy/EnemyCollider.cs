@@ -32,6 +32,7 @@ public class EnemyCollider : MonoBehaviour, IPlayerCanHit
 
             if (collision.gameObject.TryGetComponent(out IHealth health))
             {
+                Debug.Log("Hit");
                 health.TakeDamage(damage.Value);
 
 

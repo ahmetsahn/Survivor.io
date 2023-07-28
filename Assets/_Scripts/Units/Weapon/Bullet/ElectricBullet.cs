@@ -9,17 +9,6 @@ public class ElectricBullet : BaseBullet
         StartCoroutine(ReturnToPoolTimer());
     }
 
-
-    private void Update()
-    {
-        Move();
-    }
-
-    private void Move()
-    {
-        transform.position += transform.right * (bulletStats.Speed * Time.deltaTime);
-    }
-
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);

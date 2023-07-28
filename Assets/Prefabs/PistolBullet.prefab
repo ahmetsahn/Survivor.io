@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2093802984861826306}
   - component: {fileID: 7288037301913085361}
   m_Layer: 0
-  m_Name: OrangeBullet
+  m_Name: PistolBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,6 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5fe05a75f0cc942a63e77f456a19cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletStats: {fileID: 11400000, guid: ee148cf81a6fd674791490b5af3bea49, type: 2}
-  <DeathTimer>k__BackingField: 0.2
-  <BulletType>k__BackingField: 0
+  damage:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: ad7a993a31b45d344bbff17af1046d4d, type: 2}
+  speed:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 7c90ea27add4f8b46830491ebf16eab6, type: 2}
+  <DeathTimer>k__BackingField: 0.35

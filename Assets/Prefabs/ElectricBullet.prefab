@@ -195,5 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799dc7e3ebfd36242bffda4427c4b0aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletStats: {fileID: 11400000, guid: 9ab383965de80604e90db9c56908843c, type: 2}
-  <DeathTimer>k__BackingField: 0.2
+  damage:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: ba89655daa98f1e41821a9cecaf0cd8d, type: 2}
+  speed:
+    _useConstant: 0
+    _constantValue: 0
+    _variable: {fileID: 11400000, guid: 0660d05d2bdc54d41b61f43a1af68b9f, type: 2}
+  <DeathTimer>k__BackingField: 0.35
