@@ -1,5 +1,4 @@
 ﻿using Script.Runtime.Interface;
-using System.Collections;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System;
@@ -51,13 +50,6 @@ namespace Assets.Script.Runtime.AbilityModule
 
                 await UniTask.Delay(TimeSpan.FromSeconds(0.25f));
             }
-        }
-
-        void OnDrawGizmos()
-        {
-            // Draw a yellow sphere at the transform's position
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(transform.position, _radius);
         }
     }
 }

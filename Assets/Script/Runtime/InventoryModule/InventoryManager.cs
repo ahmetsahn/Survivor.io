@@ -13,13 +13,11 @@ namespace Script.Runtime.InventoryModule
         private readonly SignalBus _signalBus;
         
         private readonly List<ItemSo> _itemList = new();
-        
         private readonly List<ItemSo> _equipmentSlotList = new();
 
         private readonly Dictionary<ItemType, Sprite[]> equippedSprites = new();
 
         private const int INVENTORY_CAPACITY = 16;
-        
         
         public InventoryManager(SignalBus signalBus)
         {

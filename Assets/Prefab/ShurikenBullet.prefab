@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5204523947014954141}
   - component: {fileID: 5796897604009351631}
   - component: {fileID: -541162165573322696}
+  - component: {fileID: -1248285853153095316}
   m_Layer: 0
   m_Name: ShurikenBullet
   m_TagString: Untagged
@@ -92,6 +93,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1285211, y: 1.159366}
   m_EdgeRadius: 0
+--- !u!114 &-1248285853153095316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2554015157339509283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6aaa27e55466c549943420935bd38c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  returnToPoolDelayTime: 1
 --- !u!1 &5737181837724962534
 GameObject:
   m_ObjectHideFlags: 0

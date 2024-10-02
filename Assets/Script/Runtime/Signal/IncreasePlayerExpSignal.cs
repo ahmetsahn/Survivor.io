@@ -1,10 +1,10 @@
 ﻿namespace Script.Runtime.Signal
 {
-    public readonly struct IncreasePlayerExpUISignal
+    public readonly struct IncreasePlayerExpSignal
     {
         public readonly int ExpValue;
         
-        public IncreasePlayerExpUISignal(int expValue)
+        public IncreasePlayerExpSignal(int expValue)
         {
             ExpValue = expValue;
         }

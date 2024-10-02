@@ -1,5 +1,5 @@
 ﻿using Assets.Script.Runtime.AbilityModule;
-using Script.Ahmet.ObjectPool;
+using Assets.Script.Runtime.Signal;
 using Script.Runtime.CollectableModule.ItemModule.Factory;
 using Script.Runtime.InputModule;
 using Script.Runtime.InventoryModule;
@@ -7,7 +7,6 @@ using Script.Runtime.Signal;
 using Script.Runtime.SpawnerModule;
 using Script.Runtime.UIModule;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Script.Runtime.Core
@@ -50,7 +49,6 @@ namespace Script.Runtime.Core
         public override void InstallBindings()
         {
             Container.BindInterfacesTo<UIManager>().AsSingle();
-            Container.Bind<GameUIPanelView>().FromComponentInHierarchy().AsSingle();
             Container.BindInterfacesTo<InputManager>().AsSingle().WithArguments(inputManagerConfig);
             Container.BindInterfacesTo<ExpGemFactory>().AsSingle().WithArguments(expGemFactoryConfig);
             Container.BindInterfacesTo<ItemFactory>().AsSingle().WithArguments(itemFactoryConfig);
@@ -70,7 +68,7 @@ namespace Script.Runtime.Core
         private void BindingsSignal()
         {
             SignalBusInstaller.Install(Container);
-            Container.DeclareSignal<IncreasePlayerExpUISignal>();
+            Container.DeclareSignal<IncreasePlayerExpSignal>();
             Container.DeclareSignal<InstantiateExpGemSignal>();
             Container.DeclareSignal<InstantiateItemSignal>();
             Container.DeclareSignal<AddItemToItemListSignal>();
@@ -89,6 +87,7 @@ namespace Script.Runtime.Core
             Container.DeclareSignal<PlayerLevelUpSignal>();
             Container.DeclareSignal<InstantiateItemSignal>();
             Container.DeclareSignal<AbilityButtonClickSignal>();
+            Container.DeclareSignal<UpdatePlayerExpUISignal>();
         }
     }
 }

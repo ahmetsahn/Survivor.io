@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1947122308579332274}
   - component: {fileID: 611124608833465110}
   - component: {fileID: 3512196843425876814}
+  - component: {fileID: -1520384276148763747}
   m_Layer: 0
   m_Name: Rpg
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2019202121058345684}
@@ -4853,6 +4854,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.49699998
+--- !u!114 &-1520384276148763747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784915636548415051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6aaa27e55466c549943420935bd38c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  returnToPoolDelayTime: 2
 --- !u!1 &6623163752792829387
 GameObject:
   m_ObjectHideFlags: 0

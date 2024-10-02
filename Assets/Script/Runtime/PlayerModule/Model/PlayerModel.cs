@@ -1,5 +1,4 @@
 ﻿using System;
-using Script.Runtime.CollectableModule.ItemModule.Model;
 using Script.Runtime.WeaponModule;
 using UnityEngine;
 
@@ -13,9 +12,10 @@ namespace Script.Runtime.PlayerModule.Model
         public int Exp;
         public int Level;
         public int LevelIndex;
+        public readonly int MAX_LEVEL;
+        public readonly int AnimationHashIdle = Animator.StringToHash("Idle");
+        public readonly int AnimationHashMove = Animator.StringToHash("Move");
 
-        public int MAX_LEVEL = 19;
-        
         public float MovementSpeed;
         public float AttackRate;
         
@@ -24,9 +24,6 @@ namespace Script.Runtime.PlayerModule.Model
         public PlayerWeaponSo DefaultWeapon;
         
         public PlayerWeaponSo CurrentPlayerWeaponSo;
-
-        public readonly int AnimationHashIdle = Animator.StringToHash("Idle");
-        public readonly int AnimationHashMove = Animator.StringToHash("Move");
 
         public PlayerModel(PlayerConfig config)
         {
@@ -40,6 +37,7 @@ namespace Script.Runtime.PlayerModule.Model
             Exp = 0;
             Level = 1;
             LevelIndex = 0;
+            MAX_LEVEL = 19;
             LevelExp = config.LevelExp;
         }
     }

@@ -22,9 +22,7 @@ namespace Script.Runtime
         private readonly AbilityButton[] _abilityButtons; 
         
         private const int MAX_ABILITY_BUTTON_COUNT_PER_ROUND = 3;
-
         private const int MAX_ABILITY_LEVEL = 6;
-        
         private int _maxLevelAbilityCount;
         
         public AbilityButtonManager(SignalBus signalBus, IInstantiator instantiator, AbilityButtonManagerConfig config)

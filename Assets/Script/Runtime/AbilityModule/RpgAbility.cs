@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using Script.Ahmet.ObjectPool;
 using Script.Runtime.AbilityModule;
 using Script.Runtime.Enum;
-using Script.Runtime.Signal;
 using UnityEngine;
 using Zenject;
 
@@ -33,29 +32,7 @@ namespace Script.Runtime
             _rpgLevelConfigs = config.RpgLevelConfigs;
             _rpgPrefab = config.RpgPrefab;
             _evolvedRpgPrefab = config.EvolvedRpgPrefab;
-            _rpgSpawnCancellationTokenSource = new CancellationTokenSource();
             _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        }
-        
-        private async UniTask SpawnRpg(GameObject rpgPrefab)
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(1));
-            
-            while (!_rpgSpawnCancellationTokenSource.IsCancellationRequested)
-            {
-                GameObject rpgGameObject = ObjectPoolManager.SpawnObject(rpgPrefab, _playerTransform.position, Quaternion.identity);
-                Rpg rpg = rpgGameObject.GetComponent<Rpg>();
-                float radius = _rpgLevelConfigs[CurrentLevelIndex].Radius;
-                int damage = _rpgLevelConfigs[CurrentLevelIndex].Damage;
-                rpg.Initialize(_movementSpeed, radius, damage);
-                await UniTask.Delay(TimeSpan.FromSeconds(_spawnInterval), cancellationToken: _rpgSpawnCancellationTokenSource.Token);
-            }
-        }
-        
-        private void StopRpgSpawn()
-        {
-            _rpgSpawnCancellationTokenSource.Cancel();
-            _rpgSpawnCancellationTokenSource = new CancellationTokenSource();
         }
 
         protected override void ActivateAbility()
@@ -63,9 +40,13 @@ namespace Script.Runtime
             SpawnRpg(_rpgPrefab).Forget();
         }
 
+        protected override void DeactivateAbility()
+        {
+            CancelRpgSpawnToken();
+        }
+
         protected override void ActivateEvolvedAbility()
         {
-            StopRpgSpawn();
             SpawnRpg(_evolvedRpgPrefab).Forget();
         }
 
@@ -80,6 +61,32 @@ namespace Script.Runtime
                     SpawnRpg(_rpgPrefab).Forget();
                     break;
             }
+        }
+
+        private async UniTask SpawnRpg(GameObject rpgPrefab)
+        {
+            InitializeRpgSpawnToken();
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
+
+            while (!_rpgSpawnCancellationTokenSource.IsCancellationRequested)
+            {
+                GameObject rpgGameObject = ObjectPoolManager.SpawnObject(rpgPrefab, _playerTransform.position, Quaternion.identity);
+                Rpg rpg = rpgGameObject.GetComponent<Rpg>();
+                float radius = _rpgLevelConfigs[CurrentLevelIndex].Radius;
+                int damage = _rpgLevelConfigs[CurrentLevelIndex].Damage;
+                rpg.Initialize(_movementSpeed, radius, damage);
+                await UniTask.Delay(TimeSpan.FromSeconds(_spawnInterval), cancellationToken: _rpgSpawnCancellationTokenSource.Token);
+            }
+        }
+
+        private void InitializeRpgSpawnToken()
+        {
+            _rpgSpawnCancellationTokenSource = new CancellationTokenSource();
+        }
+
+        private void CancelRpgSpawnToken()
+        {
+            _rpgSpawnCancellationTokenSource.Cancel();
         }
     }
     

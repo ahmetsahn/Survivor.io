@@ -8,7 +8,7 @@ namespace Assets.Script.Runtime.AbilityModule
     public abstract class Ability : IDisposable
     {
         protected AbilityType AbilityType;
-        protected int CurrentLevel;
+        protected int CurrentLevel{ get; private set; }
         protected int CurrentLevelIndex { get; private set; }
        
         protected const int MAX_ABILITY_LEVEL = 6;
@@ -16,6 +16,7 @@ namespace Assets.Script.Runtime.AbilityModule
         private readonly SignalBus _signalBus;
         
         protected abstract void ActivateAbility();
+        protected abstract void DeactivateAbility();
         protected abstract void ActivateEvolvedAbility();
         protected abstract void ApplyUpgradeEffect();
 
@@ -52,10 +53,11 @@ namespace Assets.Script.Runtime.AbilityModule
         private void IncrementAbilityLevel() => CurrentLevel++;
         private void IncrementLevelIndex() => CurrentLevelIndex++;
 
-        protected virtual void UpgradeAbility()
+        private void UpgradeAbility()
         {
             if (CurrentLevel >= MAX_ABILITY_LEVEL)
             {
+                DeactivateAbility();
                 ActivateEvolvedAbility();
                 return;
             }

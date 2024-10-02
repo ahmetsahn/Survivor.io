@@ -1664,15 +1664,15 @@ MonoBehaviour:
     - Damage: 50
       Radius: 4
     - Damage: 100
+      Radius: 5
+    - Damage: 100
+      Radius: 6
+    - Damage: 100
+      Radius: 7
+    - Damage: 100
       Radius: 8
     - Damage: 100
-      Radius: 16
-    - Damage: 100
-      Radius: 32
-    - Damage: 100
-      Radius: 64
-    - Damage: 100
-      Radius: 128
+      Radius: 9
   guardianAbilityConfig:
     GuardianPrefab: {fileID: 2269397883064198058, guid: b97042bb515149b43baac078fdca6d3e, type: 3}
     EvolvedGuardianPrefab: {fileID: 8735902316307811653, guid: 3bb74add879b86749a623e31dd15a61f, type: 3}

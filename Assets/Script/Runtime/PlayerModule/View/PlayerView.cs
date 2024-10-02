@@ -1,5 +1,4 @@
 ﻿using System;
-using Cysharp.Threading.Tasks;
 using Script.Runtime.Interface;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +18,7 @@ namespace Script.Runtime.PlayerModule.View
         public SpriteRenderer[] ArmorRenderers;
         public SpriteRenderer[] WeaponRenderers;
         public SpriteRenderer[] ShoesRenderers;
+
         public Action<int> OnTakeDamageEvent { get; set; }
 
         public Action<Vector2> OnMoveEvent;
@@ -36,6 +36,7 @@ namespace Script.Runtime.PlayerModule.View
         {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
+
             OnMoveEvent?.Invoke(new Vector2(horizontal, vertical));
         }
         

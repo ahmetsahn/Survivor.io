@@ -13,7 +13,6 @@ namespace Script.Runtime.InputModule
         private readonly KeyCode _hideAllUIPanelsKey;
         private readonly KeyCode _showInventoryKey;
         
-        
         public InputManager(SignalBus signalBus, InputManagerConfig config)
         {
             _signalBus = signalBus;

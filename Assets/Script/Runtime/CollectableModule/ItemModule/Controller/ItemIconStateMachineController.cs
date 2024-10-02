@@ -2,7 +2,6 @@
 using Script.Ahmet.StateMachine;
 using Script.Runtime.CollectableModule.ItemModule.State.ItemIconState;
 using Script.Runtime.CollectableModule.ItemModule.View;
-using UnityEngine;
 using Zenject;
 
 namespace Script.Runtime.CollectableModule.ItemModule.Controller

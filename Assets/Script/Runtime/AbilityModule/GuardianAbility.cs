@@ -1,7 +1,5 @@
 ﻿using Script.Ahmet.ObjectPool;
-using Script.Runtime;
 using Script.Runtime.Enum;
-using Script.Runtime.Signal;
 using System;
 using UnityEngine;
 using Zenject;
@@ -35,13 +33,13 @@ namespace Assets.Script.Runtime.AbilityModule
             InitializeGuardian(_guardianGameObject);
         }
 
+        protected override void DeactivateAbility()
+        {
+            GameObject.Destroy(_guardianGameObject);
+        }
+
         protected override void ActivateEvolvedAbility()
         {
-            if (_guardianGameObject != null)
-            {
-                GameObject.Destroy(_guardianGameObject);
-            }
-
             SpawnEvolvedGuardianPrefab();
             InitializeGuardian(_evolvedGuardianGameObject);
         }

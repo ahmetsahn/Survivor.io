@@ -8,8 +8,9 @@ namespace Script.Runtime
 {
     public class AbilityButton : MonoBehaviour
     {
-        public AbilityType AbilityType;
-        
+        [field: SerializeField]
+        public AbilityType AbilityType { get; private set; }
+
         [SerializeField]
         private Sprite[] abilitySprites;
         

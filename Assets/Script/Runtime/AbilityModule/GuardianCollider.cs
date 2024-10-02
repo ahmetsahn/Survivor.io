@@ -1,6 +1,5 @@
 ﻿using Script.Runtime.Interface;
 using UnityEngine;
-using System;
 
 namespace Assets.Script.Runtime.AbilityModule
 {

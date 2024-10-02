@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using Script.Runtime.PlayerModule.View;
 using Script.Runtime.PlayerModule.Model;
 using System;

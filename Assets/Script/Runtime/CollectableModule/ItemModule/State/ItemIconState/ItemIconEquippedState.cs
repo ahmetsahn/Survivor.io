@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Script.Runtime.CollectableModule.ItemModule.State.ItemIconState
 {

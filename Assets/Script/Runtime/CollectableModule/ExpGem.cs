@@ -21,7 +21,7 @@ namespace Script.Runtime.CollectableModule
         
         public void Collect()
         {
-            _signalBus.Fire(new IncreasePlayerExpUISignal(data.ExpValue));
+            _signalBus.Fire(new IncreasePlayerExpSignal(data.ExpValue));
             ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
     }

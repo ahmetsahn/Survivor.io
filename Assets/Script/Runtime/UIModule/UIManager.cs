@@ -1,7 +1,6 @@
 ﻿using System;
 using Script.Runtime.Enum;
 using Script.Runtime.Signal;
-using UnityEngine;
 using Zenject;
 
 namespace Script.Runtime.UIModule

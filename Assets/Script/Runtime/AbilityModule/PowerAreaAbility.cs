@@ -26,25 +26,14 @@ namespace Assets.Script.Runtime.AbilityModule
             _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
-        private void SpawnPowerArea(GameObject prefab)
-        {
-            if (_activePowerArea != null)
-                ObjectPoolManager.ReturnObjectToPool(_activePowerArea);
-
-            _activePowerArea = ObjectPoolManager.SpawnObjectWithZenject(prefab, _playerTransform);
-            InitializePowerArea(_activePowerArea);
-        }
-
-        private void InitializePowerArea(GameObject powerAreaObject)
-        {
-            var powerArea = powerAreaObject.GetComponent<PowerArea>();
-            var config = _powerAreaConfigs[CurrentLevelIndex];
-            powerArea.Initialize(config.Radius, config.Damage);
-        }
-
         protected override void ActivateAbility()
         {
             SpawnPowerArea(_powerAreaPrefab);
+        }
+
+        protected override void DeactivateAbility()
+        {
+            ObjectPoolManager.ReturnObjectToPool(_activePowerArea);
         }
 
         protected override void ActivateEvolvedAbility()
@@ -55,6 +44,19 @@ namespace Assets.Script.Runtime.AbilityModule
         protected override void ApplyUpgradeEffect()
         {
             InitializePowerArea(_activePowerArea);
+        }
+
+        private void SpawnPowerArea(GameObject prefab)
+        {
+            _activePowerArea = ObjectPoolManager.SpawnObjectWithZenject(prefab, _playerTransform);
+            InitializePowerArea(_activePowerArea);
+        }
+
+        private void InitializePowerArea(GameObject powerAreaObject)
+        {
+            var powerArea = powerAreaObject.GetComponent<PowerArea>();
+            var config = _powerAreaConfigs[CurrentLevelIndex];
+            powerArea.Initialize(config.Radius, config.Damage);
         }
     }
 

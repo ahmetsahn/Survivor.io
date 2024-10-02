@@ -1,6 +1,4 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using Script.Ahmet.ObjectPool;
+﻿using Script.Ahmet.ObjectPool;
 using Script.Runtime.Interface;
 using UnityEngine;
 
@@ -31,7 +29,7 @@ namespace Script.Runtime.AbilityModule
         
         private void SetRandomDirection()
         {
-            _direction = UnityEngine.Random.insideUnitCircle.normalized;
+            _direction = Random.insideUnitCircle.normalized;
         }
 
         private void Update()
@@ -58,10 +56,11 @@ namespace Script.Runtime.AbilityModule
                 if (health != GetComponent<IHealth>())
                 {
                     health.OnTakeDamageEvent?.Invoke(_damage);
-                    ObjectPoolManager.SpawnObject(explosionEffectPrefab, transform.position, Quaternion.identity);
-                    ObjectPoolManager.ReturnObjectToPool(gameObject);
                 }
             }
+
+            ObjectPoolManager.SpawnObject(explosionEffectPrefab, transform.position, Quaternion.identity);
+            ObjectPoolManager.ReturnObjectToPool(gameObject);
         }
     }
 }

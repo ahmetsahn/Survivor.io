@@ -3,7 +3,6 @@ using Script.Ahmet.ObjectPool;
 using Script.Runtime.Signal;
 using UnityEngine;
 using Zenject;
-using Object = UnityEngine.Object;
 
 namespace Script.Runtime.CollectableModule.ItemModule.Factory
 {

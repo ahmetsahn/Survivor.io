@@ -1,5 +1,4 @@
-﻿using System;
-using Script.Ahmet.ObjectPool;
+﻿using Script.Ahmet.ObjectPool;
 using UnityEngine;
 
 namespace Script.Runtime

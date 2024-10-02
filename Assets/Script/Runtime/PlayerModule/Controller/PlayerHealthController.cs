@@ -31,7 +31,7 @@ namespace Script.Runtime.PlayerModule.Controller
             
             if (_model.Health <= 0)
             {
-                Debug.Log("Player is dead");
+                // Player is dead
             }
         }
         
